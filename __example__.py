@@ -6,7 +6,6 @@ import pandas as pd
 import numpy as np
 
 
-curr_num = 7
 
 # a1 = 1.5  #njh
 # a2 = 0.25
@@ -81,7 +80,7 @@ class MyPlanner:
         ##### End: Ranking tasks within resource ########
         #################################################
 
-    def plan(self, available_resources, unassigned_tasks, resource_pool, a1,a2,a3,a4,a5):
+    def plan(self, available_resources, unassigned_tasks, resource_pool, a1,a2,a3,a4,a5, curr_num):
 
         path_freq_transition = './data/freq_transition_path_' + str(curr_num) + '.pkl'
         mean_path = './data/pd_mean_var_path_' + str(curr_num) + '.pkl'
@@ -271,8 +270,8 @@ class MyPlanner:
         return assignments
 
 
-    def report(self, event):
-        pass
+    def report(self, event, curr_num):
+
         path = './data/pd_path_' +str(curr_num)+'.pkl'
 
         path_freq_transition =  './data/freq_transition_path_' +str(curr_num)+'.pkl'
@@ -390,12 +389,28 @@ class MyPlanner:
 def func1(x1,x2):
     return -((x1-3)**2+(x2-2)**2)+3
 
-def get_curr_val(a1,a2,a3,a4,a5):
 
+def sent_to_sim(a1,a2, a3, a4, a5, curr_num):
 
     my_planner = MyPlanner()
     simulator = Simulator(my_planner)
-    result = simulator.run(a1,a2,a3,a4,a5)
-    return -result[0]
+    print(curr_num)
+
+    return simulator.run(a1, a2, a3, a4, a5, curr_num)[0]
+
+
+def get_curr_val(a1,a2,a3,a4,a5):
+
+    curr_num = np.random.random()
+    # print(curr_num)
+
+
+    results = [sent_to_sim(a1, a2, a3, a4, a5, ind + curr_num) for ind in range(8)]
+
+    # result = simulator.run(a1,a2,a3,a4,a5, curr_num)[0]
+
+    print(results)
+
+    return -np.array(results).mean()
 
 # get_curr_val(1,1,1,1,1)

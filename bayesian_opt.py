@@ -23,8 +23,6 @@ def func(x):
 def main(args):
 
 
-
-
     # Bounded region of parameter space
     pbounds = {'a1': (0.0, 10),
                'a2': (0.0, 10),
@@ -40,8 +38,13 @@ def main(args):
         # is observed, verbose = 0 is silent
         random_state=1,
     )
-    path = r'C:\Users\user\workspace\compition\compition\Business_Process_Optimization_Competition'
-    path = os.path.join(path, 'prev_data_.pkl')
+
+    if sys.platform == 'linux':
+        path ='/home/eliransc/projects/def-dkrass/eliransc/tasks_scheduler'
+    else:
+        path = r'C:\Users\user\workspace\tasks_scheduler'
+
+    path = os.path.join(path, 'prev_data.pkl')
     start_time = time.time()
     if not os.path.exists(path):
         # df = pd.DataFrame([], columns=['x1', 'x2', 'target'])
