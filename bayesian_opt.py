@@ -58,7 +58,7 @@ def main(args):
         df = pd.DataFrame([], columns=['a1', 'a2', 'a3', 'a4', 'a5', 'target'])
         pkl.dump(df, open(path, 'wb'))
 
-    optimizer.maximize(path, init_points=1, n_iter=6, )
+    optimizer.maximize(path, init_points=1, n_iter=3, )
     time_took = time.time() - start_time
 
     print(f"Total runtime: {str(time_took)}")

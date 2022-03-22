@@ -2,7 +2,7 @@ import os.path
 import pickle5 as pkl
 from simulator import Simulator
 import pandas as pd
-
+import sys
 import numpy as np
 
 
@@ -82,9 +82,14 @@ class MyPlanner:
 
     def plan(self, available_resources, unassigned_tasks, resource_pool, a1,a2,a3,a4,a5, curr_num):
 
-        path_freq_transition = './data/freq_transition_path_' + str(curr_num) + '.pkl'
-        mean_path = './data/pd_mean_var_path_' + str(curr_num) + '.pkl'
-        path = './data/pd_path_' + str(curr_num) + '.pkl'
+        if sys.platform == 'linux':
+            path_freq_transition = '/scratch/eliransc/data_bayes/freq_transition_path_' + str(curr_num) + '.pkl'
+            mean_path = '/scratch/eliransc/data_bayes/pd_mean_var_path_' + str(curr_num) + '.pkl'
+            path = '/scratch/eliransc/data_bayes/pd_path_' + str(curr_num) + '.pkl'
+        else:
+            path_freq_transition = './data/freq_transition_path_' + str(curr_num) + '.pkl'
+            mean_path = './data/pd_mean_var_path_' + str(curr_num) + '.pkl'
+            path = './data/pd_path_' + str(curr_num) + '.pkl'
 
         if os.path.exists(path):
 
@@ -272,9 +277,17 @@ class MyPlanner:
 
     def report(self, event, curr_num):
 
-        path = './data/pd_path_' +str(curr_num)+'.pkl'
+        if sys.platform == 'linux':
 
-        path_freq_transition =  './data/freq_transition_path_' +str(curr_num)+'.pkl'
+            path = '/scratch/eliransc/data_bayes/pd_path_' + str(curr_num) + '.pkl'
+            path_freq_transition = '/scratch/eliransc/data_bayes/freq_transition_path_' + str(curr_num) + '.pkl'
+            mean_path = '/scratch/eliransc/data_bayes/pd_mean_var_path_' + str(curr_num) + '.pkl'
+
+        else:
+
+            path = './data/pd_path_' +str(curr_num)+'.pkl'
+            path_freq_transition =  './data/freq_transition_path_' +str(curr_num)+'.pkl'
+            mean_path = './data/pd_mean_var_path_' + str(curr_num) + '.pkl'
 
 
         if not os.path.exists(path):
@@ -333,7 +346,7 @@ class MyPlanner:
         ## Create service mean and var df per combination of task and resource
 
 
-        mean_path = './data/pd_mean_var_path_' + str(curr_num) + '.pkl'
+
 
         if not os.path.exists(mean_path):
             df_mean_var = pd.DataFrame(columns = ['resource'])
@@ -405,7 +418,7 @@ def get_curr_val(a1,a2,a3,a4,a5):
     # print(curr_num)
 
 
-    results = [sent_to_sim(a1, a2, a3, a4, a5, ind + curr_num) for ind in range(8)]
+    results = [sent_to_sim(a1, a2, a3, a4, a5, ind + curr_num) for ind in range(3)]
 
     # result = simulator.run(a1,a2,a3,a4,a5, curr_num)[0]
 
