@@ -407,7 +407,7 @@ def sent_to_sim(a1,a2, a3, a4, a5, curr_num):
 
     my_planner = MyPlanner()
     simulator = Simulator(my_planner)
-    print(curr_num)
+
 
     return simulator.run(a1, a2, a3, a4, a5, curr_num)[0]
 
@@ -420,9 +420,6 @@ def get_curr_val(a1,a2,a3,a4,a5):
 
     results = [sent_to_sim(a1, a2, a3, a4, a5, ind + curr_num) for ind in range(3)]
 
-    # result = simulator.run(a1,a2,a3,a4,a5, curr_num)[0]
-
-    print(results)
 
     return -np.array(results).mean()
 
