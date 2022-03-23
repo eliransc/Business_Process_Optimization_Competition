@@ -417,8 +417,7 @@ def get_curr_val(a1,a2,a3,a4,a5):
     curr_num = np.random.random()
     # print(curr_num)
 
-
-    results = [sent_to_sim(a1, a2, a3, a4, a5, ind + curr_num) for ind in range(3)]
+    results = [sent_to_sim(a1, a2, a3, a4, a5, ind + curr_num) for ind in range(2)]
 
 
     return -np.array(results).mean()
