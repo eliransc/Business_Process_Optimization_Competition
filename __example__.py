@@ -419,6 +419,7 @@ def get_curr_val(a1,a2,a3,a4,a5):
 
 
     results = [sent_to_sim(a1, a2, a3, a4, a5, ind + curr_num) for ind in range(3)]
+    print(results)
 
 
     return -np.array(results).mean()
