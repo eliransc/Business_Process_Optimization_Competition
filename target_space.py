@@ -204,22 +204,23 @@ class TargetSpace(object):
 
 
         x = self._as_array(params)
-
+        params = dict(zip(self._keys, x))
         try:
             target = self._cache[_hashable(x)]
         except KeyError:
 
 
-            params = dict(zip(self._keys, x))
             target = self.target_func(**params)
             self.register(params, target)
-            curr_ind = df.shape[0]
-            for key in self._keys:
-                df.loc[curr_ind, key] = params[key]
 
-            df.loc[curr_ind, 'target'] = target
+        df = pkl.load(open(path, 'rb'))
+        curr_ind = df.shape[0]
+        for key in self._keys:
+            df.loc[curr_ind, key] = params[key]
 
-            pkl.dump(df, open(path, 'wb'))
+        df.loc[curr_ind, 'target'] = target
+
+        pkl.dump(df, open(path, 'wb'))
 
 
         return target
