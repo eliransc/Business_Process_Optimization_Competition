@@ -65,7 +65,7 @@ def acq_max(ac, gp, y_max, bounds, random_state, n_warmup=10000, n_iter=10):
         print(-res.fun)
         if max_acq is None or -res.fun >= max_acq:
             x_max = res.x
-            max_acq = -res.fun[0]
+            max_acq = -res.fun
 
     # Clip output to make sure it lies within the bounds. Due to floating
     # point technicalities this is not always the case.
