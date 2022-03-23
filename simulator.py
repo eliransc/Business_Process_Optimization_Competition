@@ -5,7 +5,7 @@ import pickle5 as pickle
 from abc import ABC, abstractmethod
 
 
-RUNNING_TIME = 24*0.32
+RUNNING_TIME = 24*365
 
 
 class Event:
