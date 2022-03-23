@@ -62,7 +62,7 @@ def acq_max(ac, gp, y_max, bounds, random_state, n_warmup=10000, n_iter=10):
             continue
 
         # Store it if better than previous minimum(maximum).
-        print(-res.fun)
+
         if max_acq is None or -res.fun >= max_acq:
             x_max = res.x
             max_acq = -res.fun
